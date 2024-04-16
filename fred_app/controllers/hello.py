@@ -1,13 +1,10 @@
-from flask import (
-    Blueprint
-)
+from flask import Request 
 
+class HelloController:
+    def __init__(self, request: Request):
+        self.request = request
+        
 
-bp = Blueprint('hello', __name__, url_prefix='/hello')
-
-
- # a simple page that says hello
-@bp.route('', methods=['GET'])
-def hello():
-    return 'Hello, World!'
+    def hello(self):
+        return 'Hello, World!'
 

@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask
-from  fred_app.routes import  hello
+from  fred_app.routes import  list
 
 
 def create_app(test_config=None):
@@ -9,6 +9,6 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
 
 
-    app.register_blueprint(hello.bp)
+    app.register_blueprint(list.list_bp)
 
     return app

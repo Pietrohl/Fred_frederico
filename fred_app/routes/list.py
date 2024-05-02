@@ -6,9 +6,10 @@ from flask import (
 from fred_app.database.list_repository import ListRepository
 from fred_app.controllers.list_controller import ListController
 from fred_app.services.list_service import ListService
+from fred_app.database.sqlite_connection import connection
 
-list_db = []
-list_repo = ListRepository(list_db)
+
+list_repo = ListRepository(db_connection=connection)
 list_service = ListService(list_repo)
 
 

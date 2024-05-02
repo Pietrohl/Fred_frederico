@@ -17,4 +17,7 @@ class ListController:
     
     def get_lists(self):
         return [vars(list) for list in self.service.get_all_lists()], 200
-
+    
+    def get_list(self, id):
+        
+        return vars(self.service.get_a_list(id)), 200

@@ -19,3 +19,4 @@ list_bp = Blueprint('list', __name__, url_prefix='/list')
 
 list_bp.route('/', methods=['POST'])(ListController(request,list_service).create_list)
 list_bp.route('/', methods=['GET'])(ListController(request,list_service).get_lists)
+list_bp.route('/<id>', methods=['GET'])(ListController(request,list_service).get_list)

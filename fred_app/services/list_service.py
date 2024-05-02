@@ -14,6 +14,8 @@ class ListService:
         self.list_repository.update_list(list)
         return  list
              
-    
     def get_all_lists(self):
         return self.list_repository.get_all_lists()   
+    
+    def get_a_list(self, id):
+        return self.list_repository.get_a_list(id)

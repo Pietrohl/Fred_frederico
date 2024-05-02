@@ -1,5 +1,4 @@
 from flask import Request
-
 from fred_app.services.list_service import ListService
 from fred_app.models.list.new_list_dto import NewListDTO 
 
@@ -14,8 +13,8 @@ class ListController:
         
         list =  self.service.create_list(new_list)
         
-        return list.to_dict(), 201
+        return vars(list), 201
     
     def get_lists(self):
-        return self.service.get_all_lists(), 200
+        return [vars(list) for list in self.service.get_all_lists()], 200
 

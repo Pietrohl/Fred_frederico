@@ -9,15 +9,29 @@ class ListController:
 
     def create_list(self):
         
-        new_list = NewListDTO(name=self.request.json['name'])
-        
-        list =  self.service.create_list(new_list)
-        
-        return vars(list), 201
+        try:
+            new_list = NewListDTO(name=self.request.json['name'])
+            list =  self.service.create_list(new_list)
+            return vars(list), 201
+        except:
+            return "Error creating the list", 400
+    
     
     def get_lists(self):
-        return [vars(list) for list in self.service.get_all_lists()], 200
+        
+        try:
+            all_lists = self.service.get_all_lists()
+            return [vars(list) for list in all_lists], 200
+    
+        except:
+            return "Error fetching the lists", 404
+    
     
     def get_list(self, id):
         
-        return vars(self.service.get_a_list(id)), 200
+        try:
+            list = self.service.get_a_list(id)
+            return vars(list), 200
+            
+        except:
+            return "List not found", 404    

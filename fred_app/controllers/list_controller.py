@@ -1,5 +1,5 @@
 from flask import Request 
-from fred_app.database.list_repository import ListService
+from fred_app.services.list_service import ListService
 from fred_app.models.new_list_dto import NewListDTO
 
 class ListController:
@@ -28,5 +28,5 @@ class ListController:
             print("ERROR: ", err)
 
 
-    def get_list(self):
+    def get_lists(self):
         return [vars(list) for list in self.service.get_all_lists()], 200

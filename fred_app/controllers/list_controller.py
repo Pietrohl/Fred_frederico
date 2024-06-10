@@ -11,12 +11,24 @@ class ListController:
         new_list = NewListDTO(name = self.request.json['name'])
         list = self.service.create_list(new_list)
         return vars(list), 201
+    
+    def get_list(self):
+        try:
+            list_id = self.request.json['id']
+            return [vars(list_id)], 200
+        except:
+            raise KeyError (f"Key {list_id} not found in database"), 404
 
     
     def update_list(self):
-        list = self.request.json['name']
-        self.service.update_list(list)
-        return [vars(list)], 200
+        try:
+            list_id = self.request.json['id']
+            self.service.update_list(list)
+            return [vars(list_id)], 200
+        except Exception as err:
+            print("ERROR: ", err)
+        except:
+            raise KeyError (f"Key {list_id} not found in database"), 404
 
 
     def delete_list(self, list):

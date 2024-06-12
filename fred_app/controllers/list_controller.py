@@ -17,7 +17,8 @@ class ListController:
             list_id = self.request.json['id']
             return [vars(list_id)], 200
         except:
-            raise KeyError (f"Key {list_id} not found in database"), 404
+            raise KeyError (f"Key {list_id} not found in database")
+
 
     
     def update_list(self):
@@ -28,7 +29,7 @@ class ListController:
         except Exception as err:
             print("ERROR: ", err)
         except:
-            raise KeyError (f"Key {list_id} not found in database"), 404
+            raise KeyError (f"Key {list_id} not found in database")
 
 
     def delete_list(self, list):

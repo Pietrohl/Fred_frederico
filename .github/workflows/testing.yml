@@ -2,12 +2,23 @@
 name: testing-fred-app
 on: 
     pull_request:
+        types:
+            - closed
         branches:
             - main
-            - dev
 jobs:
-    test:
+    if_merged:
+        if: github_event.pull_request.merged == true
         runs-on: ubuntu-22.04
         steps: 
+            - name: set up python
+            - uses: action/setup-python@v5.1.0
+              with: 
+                python-version: '>=3.8.10'
+            - run: python3 tests.py
+            
+            
+            
+            
 
 

@@ -1,0 +1,13 @@
+---
+name: testing-fred-app
+on: 
+    pull_request:
+        branches:
+            - main
+            - dev
+jobs:
+    test:
+        runs-on: ubuntu-22.04
+        steps: 
+
+

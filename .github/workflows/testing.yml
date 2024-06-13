@@ -7,18 +7,18 @@ on:
         branches:
             - main
 jobs:
-    if_merged:
-        if: github_event.pull_request.merged == true
+    job1:
+        if: github.event.pull_request.merged == true
         runs-on: ubuntu-22.04
         steps: 
-            - name: set up python
-            - uses: action/setup-python@v5.1.0
+            - name: checkout actions
+              uses: actions/checkout@v4
+            - name: Set up python
+              uses: actions/setup-python@v5
               with: 
                 python-version: '>=3.8.10'
-            - run: python3 tests.py
-            
-            
-            
-            
-
-
+            - name: Run tests
+              run: python3 tests.py
+            - name: Job has been successful
+              if: ${{ success() }}
+              run: echo "Succesful job"

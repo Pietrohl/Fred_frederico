@@ -5,9 +5,9 @@ on:
         types:
             - closed
         branches:
-            - main
+            - test
 jobs:
-    job1:
+    build-and-test:
         if: github.event.pull_request.merged == true
         runs-on: ubuntu-22.04
         container: ubuntu:22.04-jammy
@@ -28,6 +28,22 @@ jobs:
             - name: check if successful
               if: ${{ success() }}
               run: echo "Successful job"
+            - name: upload as artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: my-artifact-01
+                path: #path to artifact
+                if-no-files-found: warn
+                
     deploy:
-      needs: job1
-      
+      needs: build-and-test
+      runs-on: ubuntu-22.04
+      container: ubuntu:22.04-jammy
+      steps:
+        - name: download artifact
+          uses: actions/download-artifact@v4
+          with:
+            name: my-artifact-01
+            path: #destination path
+
+

@@ -23,13 +23,13 @@ class ListController:
     
     def update_list(self):
         try:
-            list_id = self.request.json['id']
+            list = self.request.json['id']
             self.service.update_list(list)
-            return [vars(list_id)], 200
+            return [vars(list)], 200
         except Exception as err:
             print("ERROR: ", err)
         except:
-            raise KeyError (f"Key {list_id} not found in database")
+            raise KeyError (f"Key {list} not found in database")
 
 
     def delete_list(self, list):

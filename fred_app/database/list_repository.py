@@ -14,7 +14,7 @@ class ListRepository:
     
     def update_list(self, list: ListEntity) -> ListEntity:
         self.db[list.id].name = list.name
-        self.db[list.id]
+        return self.db[list.id]
 
     def delete_list(self, list: ListEntity) -> ListEntity:
         self.db[list.id].remove(list)

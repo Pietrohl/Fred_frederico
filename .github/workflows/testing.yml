@@ -44,6 +44,6 @@ jobs:
           uses: actions/download-artifact@v4
           with:
             name: my-artifact-01
-            path: #destination path
+            path: $HOME
 
 

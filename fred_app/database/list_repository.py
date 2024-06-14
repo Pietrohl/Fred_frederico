@@ -20,6 +20,9 @@ class ListRepository:
         self.db[list.id].remove(list)
 
         return list
+    
+    def get_list(self, list: ListEntity) -> ListEntity:
+        return self.db[list.id]
 
 
     def get_all_lists(self):

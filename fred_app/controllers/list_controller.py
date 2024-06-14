@@ -13,11 +13,9 @@ class ListController:
         return vars(list), 201
     
     def get_list(self):
-        try:
-            list_id = self.request.json['id']
-            return [vars(list_id)], 200
-        except:
-            raise KeyError (f"Key {list_id} not found in database")
+            list = self.service.get_list(self)
+            return [vars(list)], 200
+  
 
 
     

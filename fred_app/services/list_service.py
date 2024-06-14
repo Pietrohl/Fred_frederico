@@ -15,5 +15,8 @@ class ListService():
     def get_all_lists(self):
         return ListRepository.get_all_lists(self)
     
-    def update_list(self):
-        return ListRepository.update_list(self)
+    def update_list(self, list: List) -> List:
+        return ListRepository.update_list(self, list)
+    
+    def get_list(self, list: List) -> List:
+        return ListRepository.get_list(self, list)

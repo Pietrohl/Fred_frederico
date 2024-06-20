@@ -16,15 +16,24 @@ class ListRepository:
     
     def update_list(self, list: ListEntity) -> ListEntity:
         cur = self.db.cursor()
-        id = cur.execute("UPDATE lists SET name = ?, done = ? WHERE id = ?", (list.name, list.done, list.id)).lastrowid
-        list= self.get_list(id=id, cur=cur)
+        id = cur.execute("UPDATE lists SET name = ?, done = ? WHERE id = ?", (list.name, list.done, list.id)).rowcount
         self.db.commit()
+
+        if id == 0:
+            raise KeyError(f"Key {list.id} not found in database")
+        
+        list= self.get_list(id=list.id)
         return list
 
-    def delete_list(self, list: ListEntity) -> ListEntity:
-        self.db[list.id].remove(list)
+    def delete_list(self, id: int) -> bool:
+        cur = self.db.cursor()
+        id = cur.execute("DELETE FROM lists WHERE id = ?", (id,)).rowcount
+        self.db.commit()
+        
+        if id == 0:
+            raise KeyError(f"Key {list.id} not found in database")
+        
 
-        return list
     
     def get_list(self, id, cur = None):
         if (cur == None):

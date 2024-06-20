@@ -1,5 +1,5 @@
 class List(object):
-    def __init__(self, id, name, date, owner, done, items):
+    def __init__(self, id, name, date, owner, done, items = None):
         self.id = id
         self.name: str = name
         self.date = date

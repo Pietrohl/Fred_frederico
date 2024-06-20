@@ -8,15 +8,16 @@ class ListService:
     
     def create_list(self, new_list: NewListDTO) -> List:
         list = self.list_repository.create_list(new_list)
-        list.append_to_name(' (NEW) ')
-        self.list_repository.update_list(list)
         return list
 
     def get_all_lists(self):
-        return ListRepository.get_all_lists(self)
+        return self.list_repository.get_all_lists()
     
     def update_list(self, list: List) -> List:
-        return ListRepository.update_list(self, list)
+        return self.list_repository.update_list(list)
     
-    def get_list(self, list: List) -> List:
-        return ListRepository.get_list(self, list)
+    def get_list(self, id) -> List:
+        return self.list_repository.get_list(id)
+    
+    def delete_list(self, id) -> List:
+        return self.list_repository.delete_list(id)

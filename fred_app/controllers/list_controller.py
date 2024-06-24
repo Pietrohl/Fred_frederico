@@ -1,7 +1,7 @@
 from flask import Request 
 from fred_app.services.list_service import ListService
-from fred_app.models.new_list_dto import NewListDTO
-from fred_app.models.list_entity import List
+from fred_app.models.list.new_list_dto import NewListDTO
+from fred_app.models.list.list_entity import List
 
 class ListController:
     def __init__(self, request: Request, list_service: ListService):

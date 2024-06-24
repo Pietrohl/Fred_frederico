@@ -1,6 +1,6 @@
 from fred_app.database.list_repository import ListRepository
-from fred_app.models.list_entity import List
-from fred_app.models.new_list_dto import NewListDTO
+from fred_app.models.list.list_entity import List
+from fred_app.models.list.new_list_dto import NewListDTO
 
 class ListService:
     def __init__(self, list_repository: ListRepository):

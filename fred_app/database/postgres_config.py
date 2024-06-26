@@ -7,7 +7,7 @@ schema_file = f"$HOME/fred_app/database/schema.sql"
 conn = psycopg2.connect(host='localhost',
                         datbase='fred',
                         user=os.environ['POSTGRES_USER'],
-                        password=s.environ['POSTGRES_PASSWORD'])
+                        password=os.environ['POSTGRES_PASSWORD'])
 
 cursor = conn.cursor(cursor_factory=DictCursor)
 

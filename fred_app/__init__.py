@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask
-from  fred_app.routes import  list
+from  fred_app.routes import list
 
 
 def create_app(test_config=None):

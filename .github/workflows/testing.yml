@@ -1,0 +1,49 @@
+---
+name: testing-fred-app
+on: 
+    pull_request:
+        types:
+            - closed
+        branches:
+            - test
+jobs:
+    build-and-test:
+        if: github.event.pull_request.merged == true
+        runs-on: ubuntu-22.04
+        container: ubuntu:22.04-jammy
+        steps: 
+            - name: checkout actions
+              uses: actions/checkout@v4
+            - name: Set up python
+              uses: actions/setup-python@v5
+              with: 
+                python-version: '>=3.8.10'
+            - name: Install dependencies
+              run: |
+                python3 -m pip install --upgrade pip
+                pip install pytest
+                pip install -e .
+            - name: Run unit tests
+              run: #run tests
+            - name: check if successful
+              if: ${{ success() }}
+              run: echo "Successful job"
+            - name: upload as artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: my-artifact-01
+                path: #path to artifact
+                if-no-files-found: warn
+                
+    deploy:
+      needs: build-and-test
+      runs-on: ubuntu-22.04
+      container: ubuntu:22.04-jammy
+      steps:
+        - name: download artifact
+          uses: actions/download-artifact@v4
+          with:
+            name: my-artifact-01
+            path: $HOME
+
+

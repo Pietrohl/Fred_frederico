@@ -1,10 +1,10 @@
 from datetime import date
-from sqlite3 import Connection
-from fred_app.models.list_entity import List as ListEntity
-from fred_app.models.new_list_dto import NewListDTO
+from fred_app.models.list.new_list_dto import NewListDTO
+from fred_app.models.list.list_entity import List as ListEntity
+from psycopg2 import connect
 
 class ListRepository:
-    def __init__(self, db_connection: Connection):
+    def __init__(self, db_connection: connect):
         self.db = db_connection
 
     def create_list(self, list: NewListDTO) -> ListEntity:

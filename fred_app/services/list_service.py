@@ -13,7 +13,11 @@ class ListService:
     def get_all_lists(self):
         return self.list_repository.get_all_lists()
     
-    def update_list(self, list: List) -> List:
+    def update_list(self,id,name,done,owner,items) -> List:
+        list = self.list_repository.get_list(id)
+        
+        list.update(name = name, done = done, owner = owner, items = items)
+        
         return self.list_repository.update_list(list)
     
     def get_list(self, id) -> List:

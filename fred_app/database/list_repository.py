@@ -1,4 +1,3 @@
-from datetime import date
 from sqlite3 import Connection
 from fred_app.models.list.list_entity import List as ListEntity
 from fred_app.models.list.new_list_dto import NewListDTO

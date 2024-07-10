@@ -1,3 +1,4 @@
+from http import HTTPStatus
 import os
 
 from flask import Flask,jsonify
@@ -32,5 +33,16 @@ def create_app(test_config=None):
 
         from fred_app.routes import list
         app.register_blueprint(list.list_bp)
+
+    def handle_foo_exception(error: FredAppException):
+        
+        error_message = error.message or 'Error processing request'
+        error_status = error.status_code or HTTPStatus.INTERNAL_SERVER_ERROR
+        
+        response = jsonify(error_message)
+        response.status_code = error_status
+        return response
+
+    app.register_error_handler(Exception, handle_foo_exception)
 
     return app

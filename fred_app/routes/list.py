@@ -1,18 +1,14 @@
 from flask import (
     Blueprint,
+    current_app,
     request
 )
 
 from fred_app.controllers.list_controller import ListController
-from fred_app.database.list_repository import ListRepository
 from fred_app.services.list_service import ListService
-from fred_app.database.sqlite_connection import connection
 
 
-list_repo = ListRepository(db_connection=connection)
-list_service = ListService(list_repo)
-
-
+list_service = ListService(current_app.config['list_repository'])
 
 list_bp = Blueprint('list', __name__, url_prefix='/list')
 

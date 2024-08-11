@@ -25,6 +25,17 @@ class ListController:
 
     
     def get_list(self, id):
+        """Gist detail view.
+        ---
+        get:
+            description: The ID of the list to retrieve.
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+        """
         try:
             list = self.service.get_list(id)
             return vars(list), 200
@@ -33,7 +44,6 @@ class ListController:
             raise FredAppException('List Not Found', HTTPStatus.NOT_FOUND)
     
     def update_list(self, id):
-
         updated_list = None
         try:
             updated_list = UpdateListDTO(name = self.request.json['name'], done = self.request.json['done'], owner = self.request.json['owner'], items = self.request.json['items'])

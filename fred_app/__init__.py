@@ -5,11 +5,12 @@ from flask import Flask,jsonify
 from fred_app.database.list_repository import ListRepository
 from fred_app.database.sqlite_connection import connection
 from fred_app.models.interfaces.FredAppException import FredAppException
+from fred_app.models.list.new_list_dto import NewListDTO
+from fred_app.models.list.list_entity import List
+from fred_app.models.list.update_list_dto import UpdateListDTO
 
 
 def init_openapi_spec(app):
-    
-        
     
     spec = APISpec(
     title="Fred Frederico app API",
@@ -18,8 +19,14 @@ def init_openapi_spec(app):
     plugins=[FlaskPlugin()],
 )
     
-    
     with app.test_request_context():
+    # Add components to spec
+        spec.components.schema("NewListDTO", schema=NewListDTO.__dict__)
+        spec.components.schema("List", schema=List.__dict__)
+        spec.components.schema("UpdateListDTO", schema=UpdateListDTO.__dict__)
+        spec.components.schema("ErrorResponse", schema=FredAppException.__dict__)
+        spec.components.schema("ListId", component={"type": "integer"})
+    # Add paths to the spec
         spec.path(view=app.view_functions['list.get_list'])
         spec.path(view=app.view_functions['list.get_lists'])
         spec.path(view=app.view_functions['list.create_list'])
@@ -28,14 +35,6 @@ def init_openapi_spec(app):
     
     print(spec.to_yaml())
         
-    
-    
-    
-    
-
-    
-    
-
 def create_app(test_config=None):
 
     # create and configure the app

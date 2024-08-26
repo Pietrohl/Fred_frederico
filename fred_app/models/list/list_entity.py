@@ -1,4 +1,22 @@
 class List(object): 
+    id: str
+    name: str
+    date: str
+    owner: str
+    done: str
+    items: any
+    
+    json_schema = {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "done": {"type": "boolean"},
+                "owner": {"type": "string"},
+                "items": {"type": "array" ,"items":  "ListItem"}
+            }
+        }
+    
+    
     def __init__(self, id, name, date, owner, done, items):
         self.id = id
         self.name: str = name

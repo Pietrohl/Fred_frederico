@@ -4,7 +4,7 @@ from fred_app.services.list_service import ListService
 from fred_app.models.list.new_list_dto import NewListDTO
 from fred_app.models.list.list_entity import List
 from fred_app.models.list.update_list_dto import UpdateListDTO
-from fred_app.models.interfaces.FredAppException import FredAppException
+from fred_app.models.common.FredAppException import FredAppException
 
 class ListController:
     def __init__(self, request: Request, list_service: ListService):

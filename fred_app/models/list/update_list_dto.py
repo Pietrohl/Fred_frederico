@@ -1,4 +1,17 @@
 class UpdateListDTO:
+    
+    json_schema = {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "done": {"type": "boolean"},
+                "owner": {"type": "string"},
+                "items": {"type": "array"}
+            },
+        }
+    
+    
+    
     def __init__(self, name, done, owner, items):
             
         if  name is None:

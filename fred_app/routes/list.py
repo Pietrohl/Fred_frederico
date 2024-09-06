@@ -9,7 +9,6 @@ from fred_app.services.list_service import ListService
 
 
 list_service = ListService(current_app.config['list_repository'])
-
 list_bp = Blueprint('list', __name__, url_prefix='/list')
 
 

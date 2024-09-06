@@ -1,19 +1,20 @@
 from http import HTTPStatus
+import os
 from typing import Union
 from apispec import APISpec
 from apispec_webframeworks.flask import FlaskPlugin
 from flask import Flask,jsonify, render_template
+from fred_app.database.connection import ConnectionFactory
 from fred_app.controllers.documentation import get_redoc
 from fred_app.constants import OPENAPI_JSON_URL
 from fred_app.database.list_repository import ListRepository
-from fred_app.database.sqlite_connection import connection
 from fred_app.models.common.FredAppException import FredAppException
 from fred_app.models.list.new_list_dto import NewListDTO
 from fred_app.models.list.list_entity import List
 from fred_app.models.list.update_list_dto import UpdateListDTO
 
 
-def init_openapi_spec(app):
+def init_openapi_spec(app: Flask):
     
     spec = APISpec(
     title="Fred Frederico app API",
@@ -47,7 +48,7 @@ def init_openapi_spec(app):
        
        
        
-def register_route_modules(app):
+def register_route_modules(app: Flask):
     
     with app.app_context():
     # Register modules to the app 
@@ -86,7 +87,7 @@ def create_app(test_config=None):
         if test_config:
             db_connection = test_config['connection']
         else:
-            db_connection = connection
+            db_connection = ConnectionFactory(os.getenv('DATABASE_TYPE', 'sqlite3')).create_connection()
     
         # Set app configuration
         app.config.update({

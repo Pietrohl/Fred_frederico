@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS lists (
+    id SERIAL PRIMARY KEY,
+    name TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    owner INTEGER,
+    done BOOLEAN
+);
